@@ -8,6 +8,8 @@ VERBOSE = 1
 NB_CLASSES = 10   #number of outputs = number of digits
 N_HIDDEN = 128
 VALIDATION_SPLIT = 0.2 #how much TRAIN is reserved for VALIDATION
+#Adding dropout
+DROPOUT = 0.3
 
 #Loading MNIST dataset.
 #verify
@@ -41,12 +43,14 @@ model.add(keras.layers.Dense(N_HIDDEN,
             name='dense_layer', 
             activation='relu'))
 
-#Adding the hidden neurons now
+#Adding the hidden neurons now + dropout layers
+model.add(keras.layers.Dropout(DROPOUT))
 model.add(keras.layers.Dense(N_HIDDEN, 
             name = 'dense_layer_2', 
             activation='relu'))
+model.add(keras.layers.Dropout(DROPOUT))
 model.add(keras.layers.Dense(NB_CLASSES, 
-            name = 'dense_layer_3', 
+            name = 'dense_layer_5', 
             activation='softmax'))
 
 #Compiling the model.

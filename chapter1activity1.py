@@ -34,19 +34,27 @@ print(X_test.shape[0], 'test samples')
 Y_train = tf.keras.utils.to_categorical(Y_train, NB_CLASSES)
 Y_test = tf.keras.utils.to_categorical(Y_test, NB_CLASSES)
 
-# Build the model.
+#Build the model.
 model = tf.keras.models.Sequential()
-model.add(keras.layers.Dense(NB_CLASSES,
+model.add(keras.layers.Dense(N_HIDDEN,
             input_shape=(RESHAPED,),
             name='dense_layer', 
+            activation='relu'))
+
+#Adding the hidden neurons now
+model.add(keras.layers.Dense(N_HIDDEN, 
+            name = 'dense_layer_2', 
+            activation='relu'))
+model.add(keras.layers.Dense(NB_CLASSES, 
+            name = 'dense_layer_3', 
             activation='softmax'))
 
-# Compiling the model.
+#Compiling the model.
 model.compile(optimizer='SGD', 
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-# Training the model.
+#Training the model.
 model.fit(X_train, Y_train,
           batch_size=BATCH_SIZE, epochs=EPOCHS,
           verbose=VERBOSE, validation_split=VALIDATION_SPLIT)

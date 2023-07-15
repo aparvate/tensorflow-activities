@@ -1,8 +1,11 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
+from keras import regularizers
+from keras.regularizers import l2
+
 #Network and training parameters.
-EPOCHS = 200
+EPOCHS = 20
 BATCH_SIZE = 128
 VERBOSE = 1
 NB_CLASSES = 10   #number of outputs = number of digits
@@ -49,12 +52,16 @@ model.add(keras.layers.Dense(N_HIDDEN,
             name = 'dense_layer_2', 
             activation='relu'))
 model.add(keras.layers.Dropout(DROPOUT))
+
+#adding regularizer
+model.add(keras.layers.Dense(64, kernel_regularizer='l2'))
+
 model.add(keras.layers.Dense(NB_CLASSES, 
             name = 'dense_layer_5', 
             activation='softmax'))
 
 #Compiling the model.
-model.compile(optimizer='SGD', 
+model.compile(optimizer='Adam', 
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 

@@ -3,10 +3,9 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
-import random
 
 #Generate random data
-np.random.seed(random.randint(0,500000))
+np.random.seed(np.random.randint(0,500000))
 area = 2.5 * np.random.randn(100) + 25
 price = 25 * area + 5 + np.random.randint(20,50, size = len(area))
 data = np.array([area, price])
